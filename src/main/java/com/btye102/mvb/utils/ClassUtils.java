@@ -14,7 +14,8 @@ import java.util.stream.Stream;
 public final class ClassUtils {
 
     /**
-     * 获取方法参数名
+     * 获取方法签名
+     * eg: getUserId(java.lang.Integer)
      * */
     public static String getMethodParamName(Method method) {
         String name = method.getName();

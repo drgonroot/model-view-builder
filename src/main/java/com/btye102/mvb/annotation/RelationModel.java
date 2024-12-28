@@ -15,6 +15,7 @@ public @interface RelationModel {
 
     /**
      * model属性方法名，无方法参数
+     * eg: getUserId() 这种类似写法
      */
     String bindModelAttrGetMethod();
 
@@ -24,7 +25,8 @@ public @interface RelationModel {
     Class<?> modelDaoClass();
 
     /**
-     * modelDao的方法
+     * modelDao的方法签名
+     * eg: accept(java.lang.Integer) 这种类似写法
      * */
     String modelDaoMethod();
 }

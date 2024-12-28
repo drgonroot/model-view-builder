@@ -14,8 +14,12 @@ import java.lang.annotation.*;
 public @interface RelationView {
     /**
      * model属性方法名，无方法参数
+     * eg: getUserId() 这种类似写法
      * */
     String bindModelAttrGetMethod();
 
+    /**
+     * 关联的视图
+     * */
     Class<?> viewClass();
 }
