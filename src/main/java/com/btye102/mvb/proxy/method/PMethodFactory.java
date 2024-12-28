@@ -1,4 +1,4 @@
-package com.btye102.mvb.proxy;
+package com.btye102.mvb.proxy.method;
 
 import java.lang.reflect.Method;
 

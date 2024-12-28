@@ -1,4 +1,4 @@
-package com.btye102.mvb.proxy;
+package com.btye102.mvb.proxy.method;
 
 import com.btye102.mvb.builder.BuildContext;
 import com.btye102.mvb.builder.ModelViewBuilder;

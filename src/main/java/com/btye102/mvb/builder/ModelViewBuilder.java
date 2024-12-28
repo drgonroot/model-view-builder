@@ -6,7 +6,7 @@ import com.btye102.mvb.annotation.View;
 import com.btye102.mvb.exception.MissingDaoInstanceException;
 import com.btye102.mvb.exception.MissingMethodException;
 import com.btye102.mvb.exception.MissingViewException;
-import com.btye102.mvb.proxy.*;
+import com.btye102.mvb.proxy.method.*;
 import com.btye102.mvb.utils.ClassUtils;
 import com.sun.istack.internal.NotNull;
 

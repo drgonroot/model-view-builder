@@ -1,25 +1,24 @@
-package com.btye102.mvb.proxy;
+package com.btye102.mvb.proxy.method;
 
 import com.btye102.mvb.builder.BuildContext;
 import com.btye102.mvb.builder.ModelViewBuilder;
 
-import java.lang.reflect.Method;
+import java.lang.invoke.MethodHandle;
 
 /**
- * Model方法执行
- *
  * @author: rd13
  * @since: 2024/12/26
  **/
-public class ModelPMethod implements PMethod {
-    private final Method method;
+public class RawPMethod implements PMethod {
 
-    public ModelPMethod(Method method) {
-        this.method = method;
+    private final MethodHandle methodHandle;
+
+    public RawPMethod(MethodHandle methodHandle) {
+        this.methodHandle = methodHandle;
     }
 
     @Override
     public Object invoke(Class<?> viewClass, Object proxy, Object model, ModelViewBuilder viewBuilder, BuildContext context, Object[] args) throws Throwable {
-        return method.invoke(model, args);
+        return methodHandle.bindTo(proxy).invokeWithArguments(args);
     }
 }
