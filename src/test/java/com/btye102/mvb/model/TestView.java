@@ -4,22 +4,23 @@ import com.btye102.mvb.annotation.RelationModel;
 import com.btye102.mvb.annotation.RelationView;
 import com.btye102.mvb.annotation.View;
 import com.btye102.mvb.dao.UserDAO;
+import com.btye102.mvb.proxy.instance.ProxyType;
 
-@View(modelClass = TestModel.class)
-public interface TestView {
-    String getName();
+@View(modelClass = TestModel.class, proxyType = ProxyType.CGLIB)
+public abstract class TestView {
+    public abstract String getName();
 
     @RelationView(bindModelAttrGetMethod = "getUserId()", viewClass = UserView.class)
-    UserView getUser();
+    public abstract UserView getUser();
 
     @RelationModel(bindModelAttrGetMethod = "getUserId()", modelDaoClass= UserDAO.class, modelDaoMethod = "accept(java.lang.Integer)")
-    User getUser1();
+    public abstract User getUser1();
 
-    default String getOwner() {
+    public  String getOwner() {
         return "getOwner";
     }
 
-    default String getOwner2() {
+    public  String getOwner2() {
         return getOwner() + "2";
     }
 }

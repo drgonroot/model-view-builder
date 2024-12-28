@@ -29,8 +29,4 @@ public final class ClassUtils {
     public static List<Method> getMethodList(Class<?> clazz) {
         return Stream.of(clazz.getDeclaredMethods()).collect(Collectors.toList());
     }
-
-    public static Method getMethod(Class<?> clazz) {
-        return null;
-    }
 }

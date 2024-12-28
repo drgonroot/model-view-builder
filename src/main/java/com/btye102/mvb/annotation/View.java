@@ -1,6 +1,7 @@
 package com.btye102.mvb.annotation;
 
 import com.btye102.mvb.builder.GetModel;
+import com.btye102.mvb.proxy.instance.ProxyType;
 
 import java.lang.annotation.*;
 
@@ -20,7 +21,18 @@ public @interface View {
      * */
     Class<?> modelClass();
 
+    /**
+     * 获取model的dao类
+     * */
     Class<?> modelDaoClass() default Object.class;
 
+    /**
+     * 获取model的dao类方法接口
+     * */
     Class<? super GetModel> modelDaoMethodClass() default GetModel.class;
+
+    /**
+     * 代理方式
+     * */
+    ProxyType proxyType() default ProxyType.JDK;
 }
