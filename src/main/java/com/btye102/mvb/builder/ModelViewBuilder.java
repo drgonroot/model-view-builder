@@ -7,7 +7,6 @@ import com.btye102.mvb.exception.*;
 import com.btye102.mvb.proxy.instance.ProxyType;
 import com.btye102.mvb.proxy.method.*;
 import com.btye102.mvb.utils.ClassUtils;
-import com.sun.istack.internal.NotNull;
 
 import java.lang.reflect.*;
 import java.util.*;
@@ -42,14 +41,16 @@ public class ModelViewBuilder {
     /**
      * 构建成对应视图数据
      */
-    public <T> T build(Object model, Class<T> viewClass, @NotNull BuildContext context) throws BuildViewException {
+    public <T> T build(Object model, Class<T> viewClass, BuildContext context) throws BuildViewException {
         if (model == null) {
             return null;
         }
+
         View viewAnnotation = scanViewClassAnnotation(viewClass);
         if (viewAnnotation == null) {
             throw new ViewAnnotationCheckException(String.format("%s类View注解", viewClass.getName()));
         }
+        context = (context == null ? new BuildContext() : context);
         context.setModelViewBuilder(this)
                 .setViewProxyMethodMap(Collections.unmodifiableMap(viewProxyMethodMap));
         return viewAnnotation.proxyType().createProxyInstance(viewClass, model, context);
