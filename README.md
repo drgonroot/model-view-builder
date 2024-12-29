@@ -1,7 +1,7 @@
 
-# model-view-builder: model到View的构建器
+# model-view-builder: model到view的构建器
 
-[![maven central](https://img.shields.io/maven-central/v/com.btye102/request-json-boot-starter.svg?label=Maven%20Central)](https://github.com/drgonroot/model-view-builder)   [![License](https://img.shields.io/:license-MulanPSL2-blue.svg)](http://license.coscl.org.cn/MulanPSL2/index.html)
+[![maven central](https://img.shields.io/maven-central/v/com.btye102/request-json-boot-starter.svg?label=Maven%20Central)](https://github.com/drgonroot/model-view-builder)   [![License](https://img.shields.io/:license-MulanPSL2-blue.svg)](https://license.coscl.org.cn/MulanPSL2)
 [![jdk](https://img.shields.io/badge/JDK-8+-green.svg)](https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html)
 
 -------
@@ -90,12 +90,13 @@ class ModelViewBuilderTest {
     }
 }
 ```
-### 🌓HTTP请求解析参数使用指南
-
-
-```java
-
-```
+### 🌓注解说明
+* View
+标识字段为视图
+* RelationView
+标识属性关联其他属性
+* RelationModel
+标识属性关联模型数据
 
 ## 📦安装
 
