@@ -105,8 +105,8 @@ class ModelViewBuilderTest {
 
 ```xml
 <dependency>
-	<groupId>com.btye102</groupId>
-	<artifactId>model-view-builder</artifactId>
-	<version>1.0.0</version>
+    <groupId>com.btye102</groupId>
+    <artifactId>model-view-builder</artifactId>
+    <version>1.0.0</version>
 </dependency>
 ```
