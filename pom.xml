@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.btye102</groupId>
-    <artifactId>model-view-builder</artifactId>
-    <version>1.0.0</version>
-	<description>model-view-builder 解决了后端返回Json数据给客户端，需要大量代码手工拼装数据问题。简单定义视图类即可。</description>
+	<groupId>com.btye102</groupId>
+	<artifactId>model-view-builder</artifactId>
+	<version>1.0.0</version>
+	<description>model-view-builder 解决了后端返回Json数据给客户端，需要大量代码手工拼装数据问题。简单定义视图类即可。
+	</description>
 	<url>https://github.com/drgonroot/model-view-builder</url>
 
 	<issueManagement>
@@ -51,21 +52,21 @@
 		<jacoco-maven-plugin.version>0.8.7</jacoco-maven-plugin.version>
 	</properties>
 
-    <dependencies>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter</artifactId>
-            <version>RELEASE</version>
-            <scope>test</scope>
-        </dependency>
+	<dependencies>
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter</artifactId>
+			<version>RELEASE</version>
+			<scope>test</scope>
+		</dependency>
 
-        <dependency>
-            <groupId>cglib</groupId>
-            <artifactId>cglib</artifactId>
-            <version>3.3.0</version>
-            <scope>provided</scope>
-        </dependency>
-    </dependencies>
+		<dependency>
+			<groupId>cglib</groupId>
+			<artifactId>cglib</artifactId>
+			<version>3.3.0</version>
+			<scope>provided</scope>
+		</dependency>
+	</dependencies>
 
 	<build>
 		<plugins>
@@ -121,11 +122,11 @@
 			<distributionManagement>
 				<snapshotRepository>
 					<id>ossrh</id>
-					<url>https://s01.oss.sonatype.org/content/repositories/snapshots/</url>
+					<url>https://central.sonatype.com/</url>
 				</snapshotRepository>
 				<repository>
 					<id>ossrh</id>
-					<url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+					<url>https://central.sonatype.com/</url>
 				</repository>
 			</distributionManagement>
 			<build>
@@ -194,6 +195,16 @@
 								</configuration>
 							</execution>
 						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.sonatype.central</groupId>
+						<artifactId>central-publishing-maven-plugin</artifactId>
+						<version>0.4.0</version>
+						<extensions>true</extensions>
+						<configuration>
+							<publishingServerId>ossrh</publishingServerId>
+							<tokenAuth>true</tokenAuth>
+						</configuration>
 					</plugin>
 					<!--<plugin>-->
 					<!--  <groupId>org.sonatype.plugins</groupId>-->
