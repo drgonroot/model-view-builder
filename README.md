@@ -1,7 +1,7 @@
 
 # model-view-builder: model到view的构建器
 
-[![maven central](https://img.shields.io/maven-central/v/com.btye102/request-json-boot-starter.svg?label=Maven%20Central)](https://github.com/drgonroot/model-view-builder)   [![License](https://img.shields.io/:license-MulanPSL2-blue.svg)](https://license.coscl.org.cn/MulanPSL2)
+[![maven central](https://img.shields.io/maven-central/v/com.btye102/model-view-builder.svg?label=Maven%20Central)](https://github.com/drgonroot/model-view-builder)   [![License](https://img.shields.io/:license-MulanPSL2-blue.svg)](https://license.coscl.org.cn/MulanPSL2)
 [![jdk](https://img.shields.io/badge/JDK-8+-green.svg)](https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html)
 
 -------
