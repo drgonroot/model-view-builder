@@ -4,15 +4,53 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.example</groupId>
+    <groupId>com.btye102</groupId>
     <artifactId>model-view-builder</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.0</version>
+	<description>model-view-builder 解决了后端返回Json数据给客户端，需要大量代码手工拼装数据问题。简单定义视图类即可。</description>
+	<url>https://github.com/drgonroot/model-view-builder</url>
 
-    <properties>
-        <maven.compiler.source>8</maven.compiler.source>
-        <maven.compiler.target>8</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
+	<issueManagement>
+		<system>Github Issue</system>
+		<url>https://github.com/drgonroot/model-view-builder/issues</url>
+	</issueManagement>
+
+	<licenses>
+		<license>
+			<name>Mulan Permissive Software License，Version 2</name>
+			<url>https://license.coscl.org.cn/MulanPSL2</url>
+		</license>
+	</licenses>
+
+	<scm>
+		<connection>https://github.com/drgonroot/model-view-builder.git</connection>
+		<url>https://github.com/drgonroot/model-view-builder</url>
+	</scm>
+
+	<developers>
+		<developer>
+			<name>useheart</name>
+			<email>drgonroot@gmail.com</email>
+			<roles>
+				<role>Developer</role>
+			</roles>
+			<timezone>+8</timezone>
+		</developer>
+	</developers>
+
+	<properties>
+		<!--maven-->
+		<maven.test.skip>false</maven.test.skip>
+		<project.build.sourceEncoding>utf-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>utf-8</project.reporting.outputEncoding>
+		<gpg.keyname>EB2CADFF91ADF81A</gpg.keyname>
+		<!--dependency-->
+		<java.version>1.8</java.version>
+		<compile.version>8</compile.version>
+		<!--plugin-->
+		<jacoco-maven-plugin.version>0.8.7</jacoco-maven-plugin.version>
+	</properties>
+
     <dependencies>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -27,7 +65,150 @@
             <version>3.3.0</version>
             <scope>provided</scope>
         </dependency>
-
     </dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.8.1</version>
+				<configuration>
+					<source>${compile.version}</source>
+					<target>${compile.version}</target>
+					<compilerArgument>-Xlint:unchecked</compilerArgument>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>3.3.0</version>
+				<configuration>
+					<archive>
+						<index>true</index>
+						<manifest>
+							<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+						</manifest>
+						<manifestEntries>
+							<Build-OS>${os.name}</Build-OS>
+							<Built-By>${user.name}</Built-By>
+							<Build-Jdk>${java.version}</Build-Jdk>
+							<Build-Timestamp>${maven.build.timestamp}</Build-Timestamp>
+						</manifestEntries>
+					</archive>
+				</configuration>
+			</plugin>
+			<!-- Javadoc -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>3.5.0</version>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+	<profiles>
+		<!--https://central.sonatype.org/publish/publish-maven/-->
+		<profile>
+			<id>release</id>
+			<distributionManagement>
+				<snapshotRepository>
+					<id>ossrh</id>
+					<url>https://s01.oss.sonatype.org/content/repositories/snapshots/</url>
+				</snapshotRepository>
+				<repository>
+					<id>ossrh</id>
+					<url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+				</repository>
+			</distributionManagement>
+			<build>
+				<plugins>
+					<!-- Source -->
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-source-plugin</artifactId>
+						<version>3.2.1</version>
+						<executions>
+							<execution>
+								<id>ossrh</id>
+								<phase>package</phase>
+								<goals>
+									<goal>jar-no-fork</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+					<!-- 测试覆盖度 -->
+					<plugin>
+						<groupId>org.jacoco</groupId>
+						<artifactId>jacoco-maven-plugin</artifactId>
+						<version>${jacoco-maven-plugin.version}</version>
+						<configuration>
+							<skip>${maven.test.skip}</skip>
+							<destFile>${project.build.directory}/coverage-reports/jacoco-unit.exec</destFile>
+							<dataFile>${project.build.directory}/coverage-reports/jacoco-unit.exec</dataFile>
+							<output>file</output>
+							<append>true</append>
+							<excludes>
+								<exclude>**/grpc/auto/**</exclude>
+							</excludes>
+						</configuration>
+						<executions>
+							<execution>
+								<id>default-prepare-agent</id>
+								<goals>
+									<goal>prepare-agent</goal>
+								</goals>
+							</execution>
+							<execution>
+								<id>default-report</id>
+								<phase>test</phase>
+								<goals>
+									<goal>report</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+					<!-- Gpg Signature -->
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-gpg-plugin</artifactId>
+						<version>1.6</version>
+						<executions>
+							<execution>
+								<id>sign-artifacts</id>
+								<phase>verify</phase>
+								<goals>
+									<goal>sign</goal>
+								</goals>
+								<configuration>
+									<keyname>${gpg.keyname}</keyname>
+									<passphraseServerId>${gpg.keyname}</passphraseServerId>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+					<!--<plugin>-->
+					<!--  <groupId>org.sonatype.plugins</groupId>-->
+					<!--  <artifactId>nexus-staging-maven-plugin</artifactId>-->
+					<!--  <version>1.6.8</version>-->
+					<!--  <extensions>true</extensions>-->
+					<!--  <configuration>-->
+					<!--    <serverId>ossrh</serverId>-->
+					<!--    <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>-->
+					<!--    <autoReleaseAfterClose>true</autoReleaseAfterClose>-->
+					<!--  </configuration>-->
+					<!--</plugin>-->
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 
 </project>
